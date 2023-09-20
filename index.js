@@ -2,6 +2,7 @@ const { Telegraf, Extra, Markup } = require('telegraf')
 const dotenv = require('dotenv')
 const { FxLogin, GetAccountInfo } = require('./src/fxapi')
 const fs=require('fs')
+const axios = require('axios')
 require("util").inspect.defaultOptions.depth = null
 dotenv.config()
 
@@ -173,3 +174,19 @@ const ConnectFXBook=async()=>{
                 await ConnectFXBook()
     }
 }
+
+const testTelegram=()=>{
+
+        axios.post(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,{"chat_id": "testfxbookchannel", "text": "This is a test from curl",})
+            .then(function (response) {
+                console.log("Login data", response.data);
+                
+            })
+            .catch(function (error) {
+                console.log("Login failed!", error);
+                
+            });
+    
+    
+}
+testTelegram()
